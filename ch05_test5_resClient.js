@@ -1,4 +1,5 @@
 var http = require('http');
+var fs = require('fs');
 var server = http.createServer();
 var port = 3000;
 
@@ -18,6 +19,13 @@ server.on('connection', function(socket){
 server.on('request',function(req,res){
     console.log('enter the client"s Request');
     
+    var filename = 'house.png';
+    fs.readFile(filename, function(err,data){
+        res.writeHead(200, {"Content-Type":"image/png"})
+        res.write(data);
+        res.end();
+    });
+
     res.writeHead(200, {"Content-Type": "text/html; charset=utf-8"});
     res.write("<!DOCTYPE html>");
     res.write("<html>");
