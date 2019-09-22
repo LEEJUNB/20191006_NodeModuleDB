@@ -21,22 +21,11 @@ server.on('request',function(req,res){
     
     var filename = 'house.png';
     fs.readFile(filename, function(err,data){
-        res.writeHead(200, {"Content-Type":"image/png"})
+        res.writeHead(200, {"Content-Type":"image/png"});
         res.write(data);
         res.end();
     });
 
-    res.writeHead(200, {"Content-Type": "text/html; charset=utf-8"});
-    res.write("<!DOCTYPE html>");
-    res.write("<html>");
-    res.write(" <head>");
-    res.write("<title>응답페이지</title>");
-    res.write(" </head>");
-    res.write("  <body>");
-    res.write("   <h1>this is the res page from node.js</h1>")
-    res.write("  </body>");
-    res.write("</html>");
-    res.end();
 });
 
 server.on('close', function(){
