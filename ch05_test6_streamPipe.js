@@ -8,7 +8,6 @@ server.listen(port, function(){
 });
 
 // client connection Event processing
-//// Q-1. socket??
 server.on('connection', function(socket){
     var addr = socket.address();
     console.log('Access the client : %s %d', addr.address, addr.port);
@@ -16,14 +15,13 @@ server.on('connection', function(socket){
 
 // Event Processing client request
 server.on('request',function(req,res){
-    console.log('enter the client"s Request');
-    
+    console.log('클라이언트 요청이 들어옴');
+
     var filename = 'house.png';
-    fs.readFile(filename, function(err,data){
-        res.writeHead(200, {"Content-Type":"image/png"});
-        res.write(data);
-        res.end();
-    });
+    var infile = fs.createReadStream(filename, {flags:'r'});
+
+    // pipe() method를 이용한 연결, 자동 처리 설정
+    infile.pipe(res);
 });
 
 server.on('close', function(){
