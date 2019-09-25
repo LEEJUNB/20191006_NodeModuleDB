@@ -6,7 +6,7 @@ var app = express();
 app.use(function(req,res,next){ 
     console.log('첫번째 미들웨어, 요청 처리함');
     
-    var userAgent = req.header('User-Agnet'); // cli가 req할때 전달되는 헤더 값
+    var userAgent = req.header('User-Agent'); // cli가 req할때 전달되는 헤더 값
     var paramName = req.query.name; // 요청파라미터(쿼리스트링)중 name의 값을 확인
     //cli에서 get방식으로 요청한 요청 파라미터(쿼리스트링_문자열로 전달함)들은 요청 객체(req)의 query객체 안에 들어간다
     //cli가 주소 문자열에 포함시켜 전달하는 쿼리스트링.

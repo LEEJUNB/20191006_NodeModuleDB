@@ -1,20 +1,18 @@
-var express = require("express"),
+var express = require('express'),
     http = require('http');
 
 var app = express();
+app.use(function(res,req){
+    console.log("first middleware");
 
-app.use(function(req,res,next){
-    console.log()
-    req.user = 'mike';
-    next();
+    var userAgent = req.header('User-Agent');
+    var paramName = req.query.name;
+
+    res.writeHead(200, {"Content-Type":"text/html;charset=utf8"});
+    res.write();
+    res.end();
 });
 
-app.use(function(req,res,next){
-    console.log("두번쨰 미들웨어, 요청처리");
-    res.writeHead('200',{'Content-Type':'text/html;charset=utf8'});
-    res.end('<h1>Express'+req.user+'가 응답한 결과 </h1>');
-});
-
-http.createServer(app).listen(3000,function(){
-    console.log('Express서버가 3000번 포트에서 시작');
-});
+app.use(function(req,res){
+    console.log('');
+})
