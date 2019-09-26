@@ -18,10 +18,10 @@ server.on('request',function(req,res){
     console.log('클라이언트 요청이 들어옴');
 
     var filename = 'house.png';
-    var infile = fs.createReadStream(filename, {flags:'r'});
+    var infile = fs.createReadStream(filename, {flags:'r'});// 스트림객체로 파일읽음, 'r'은 파일 읽음을 나타냄
 
     // pipe() method를 이용한 연결, 자동 처리 설정
-    infile.pipe(res);
+    infile.pipe(res); // 스트림객체인 infile안의 pipe메소드로 응답객체 연결함
 });
 
 server.on('close', function(){

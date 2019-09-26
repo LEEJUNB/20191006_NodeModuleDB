@@ -1,18 +1,12 @@
-var express = require('express'),
-    http = require('http');
+var http = require("http");
+var server = http.createServer();
 
-var app = express();
-app.use(function(res,req){
-    console.log("first middleware");
-
-    var userAgent = req.header('User-Agent');
-    var paramName = req.query.name;
-
-    res.writeHead(200, {"Content-Type":"text/html;charset=utf8"});
-    res.write();
-    res.end();
+var port = 3000;
+server.listen(port,function(){
+    console.log("server is starting");
 });
 
-app.use(function(req,res){
-    console.log('');
+server.on("connection",function(socket){
+    var addr = socket.address();
+    
 })
