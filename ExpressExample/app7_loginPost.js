@@ -1,10 +1,23 @@
+```
+<static 미들웨어>
+특정 폴더의 파일들을 특정 패스로 접근가능하게 함
+static 미들웨어는 외장 모듈이므로 설치 npm install serve-static --save
+가령 public폴더에 있는 모든 파일을 웹 서버의 루트 패스 접근을 허용하고 싶다면 다음 코드를 추가
+app.use(static(path.join(__dirname,'public')));
+
+<body-parser미들웨어>
+POST요청시 요청 파라미터 확인 가능
+GET방식으로 요청시 주소 문자열에 요청 파라미터가 들어가지만
+POST방식으로 요청시 본문영역에 요청 파라미터가 들어감.
+고로 body-parser 미들웨어는 POST방식으로 요청을 받을 때 본문 영역에 있는 요청 파라미터를 파싱하여 요청 객체의 body속성에 삽입
+```
 var express = require('express'),
     http = require('http'),
-    path = require*('path');
+    path = require('path');
 
 // 익스프레스의 미들웨어 불러오기
 var bodyParser = require('body-parser'),
-    static = require('server-static');
+    static = require('serve-static');
 
 // 익스프레스 객체 생성
 var app = express();
@@ -18,7 +31,7 @@ app.use(bodyParser.urlencoded({extended : false}));
 
 // body-parser를 사용해 application/json형식으로 전달된 요청 파라미터를 파싱
 app.use(bodyParser.json());
-
+                                                                             
 app.use(static(path.join(__dirname, 'public')));
 
 // 미들웨어에서 파라미터 확인
@@ -50,4 +63,4 @@ http.createServer(app).listen(3000,function(){
     console.log('Express서버가 3000번 포트에서 시작');
 });
 
-// http://localhost:3000/?name=mike로 접속
+// http://localhost:3000/?name=mike로 접속할 것
