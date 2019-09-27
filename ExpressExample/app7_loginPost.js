@@ -32,7 +32,7 @@ app.use(bodyParser.urlencoded({extended : false}));
 // body-parser를 사용해 application/json형식으로 전달된 요청 파라미터를 파싱
 app.use(bodyParser.json());
                                                                              
-app.use(static(path.join(__dirname, 'public')));
+app.use(static(path.join(__dirname, 'public'))); // static은 특정폴더의 파일들을 특정패스로 접근할 수 있게 함
 
 // 미들웨어에서 파라미터 확인
 app.use(function(req,res,next){ 
@@ -48,7 +48,7 @@ app.use(function(req,res,next){
     res.writeHead('200', {'Content-Type' : 'text/html;charset=utf8'});
     res.write('<h1>Expree server response result</h1>');
     res.write('<div><p>Param id:'+paramId+'</p></div>');
-    res.write('<div>{p>Param password : ' + paramPassword + '</p></div>');
+    res.write('<div><p>Param password : ' + paramPassword + '</p></div>');
     res.end();
 });
 
