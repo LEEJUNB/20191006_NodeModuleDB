@@ -15,7 +15,7 @@ var sayNode = function() {
 var es = 'ES';
 /////
 // var oldObj = {
-//     sayJS : function(){
+//     sayJS : function(){ // sayJS객체의 메서드에 함수를 연결
 //         console.log('JS');
 //     },
 //     sayNode : sayNode,
@@ -56,3 +56,5 @@ function not1(x){
     return !x;
 }
 const no2 = x => !x;
+
+// function this
