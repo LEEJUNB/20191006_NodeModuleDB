@@ -11,9 +11,13 @@
 서버는 cli에 요청자를 추정할 만한 정보를 쿠키와 함께 보내고 그 다음부터 cli로부터 쿠키받아 요청자 파악
 쿠키는 요청과 응답의 헤더에 저장
 요청,응답은 각각 헤더와 본문을 가진다.
+
+헤더는 요청또는 응답에 대한 정보를 가진 곳
+본문은 서버와 클라이언트 간에 주고받을 실제 데이터를 담아두는 공간
+쿠키는 부가적인 정보이므로 헤더에 저장
 */
 
-// 서버에서 직접 parseCookies 함수라는 쿠키를 만들어 요청자의 브라우저에 넣어보자
+// 서버에서 직접 parseCookies 함수라는 쿠키를 만든 뒤 요청자의 브라우저에 넣어보자
 const http = require('http');
 const parseCookies = (cookie = '') =>
     cookie
@@ -26,13 +30,17 @@ const parseCookies = (cookie = '') =>
         }, {});
 
 http.createServer((req,res) => {
-    const cookies = parseCookies(req,headers.cookie); // createServer메서드의 콜백에선 가장 req객체에 담긴 쿠키를 분석. 쿠키는 req.headers.cookie에 들어있음. req.header는 요청헤더의미
+    const cookies = parseCookies(req.headers.cookie); // createServer메서드의 콜백에선 가장 req객체에 담긴 쿠키를 분석. 쿠키는 req.headers.cookie에 들어있음. req.header는 요청헤더의미
     console.log(req.url, cookies); // req.url은 주소의 path,search부분을 알려줌
     
     // 쿠키는 요청과 응답의 헤더를 통해 오고가기에 res.writeHead메서드를 사용하여 쿠키를 응답의 헤더에 기록한다.
-    res.writeHead(200, { 'Set-Cookie':'mycookie=test'});  // Set-Cookie는 브라우저에게 쿠키 값을 저장하란 의미. mycookie=test라는 쿠키를 저장
+    res.writeHead(200, { 'Set-Cookie':'mycookie=test'});  // Set-Cookie는 브라우저에게 쿠키 값을 저장하란 의미. mycookie=test라는 쿠키를 심으라고 브라우저에게 명령. 이걸 받은 브라우저는 이 쿠키를 심음. 다음부터 cli는 요청보낼 때 req.header에 cookie를 보냄
     res.end('Hello Cookie');
 })
     .listen(8082, () => {
         console.log('8082번 포트에서 서버 대기 중');
     });
+// 실행시 콘솔에 나타나는 '/' 는 요청을 의미
+// 첫번째 요청(/)을 보내기 전엔 브라우저엔 쿠키없음. 서버는 응답 헤더에 mycookie=test라는 쿠키를 심으라고 브라우저에게 명령
+// 그래서 두번째 요청의 헤더에 쿠키들어있음
+// 실행시 favicon.ico { mycookie: 'test' }으로 나오는데 favicon.ico란 웹 사이트 탭의 이미지를 의미. HTML에 파비콘 정보가 없을 때 이렇게 favicon.ico를 요청하는 것
