@@ -1,4 +1,4 @@
-```
+/*
 <static 미들웨어>
 특정 폴더의 파일들을 특정 패스로 접근가능하게 함
 static 미들웨어는 외장 모듈이므로 설치 npm install serve-static --save
@@ -10,7 +10,7 @@ POST요청시 요청 파라미터 확인 가능
 GET방식으로 요청시 주소 문자열에 요청 파라미터가 들어가지만
 POST방식으로 요청시 본문영역에 요청 파라미터가 들어감.
 고로 body-parser 미들웨어는 POST방식으로 요청을 받을 때 본문 영역에 있는 요청 파라미터를 파싱하여 요청 객체의 body속성에 삽입
-```
+*/
 var express = require('express'),
     http = require('http'),
     path = require('path');
