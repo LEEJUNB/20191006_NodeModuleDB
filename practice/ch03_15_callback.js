@@ -3,8 +3,6 @@
 콜백함수 : 파라미터로 전달되는 함수, 함수가 실행되는 중간에 호출되어 상태 정보를 전달하거나 결과 값을 처리하는데 사용
  */
 
-
-
  function add(a,b, callback) {
      var result = a+b; 
      callback(result); // 더 이상 반환하지 않도록 return키워드 사용 코드 부분을 삭제

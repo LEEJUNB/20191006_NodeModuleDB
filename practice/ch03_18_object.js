@@ -11,9 +11,15 @@
  }
 
  // prototype속성 쓴 이유 : Person객체가 실제 데이터를 담기 위한 것이 아니라 인스턴스 객체 생성위한 틀이기 때문. 인스턴스 객체 생성시 메모리 효율적 관리 가능
+ // 이처럼 새 인스턴스 객체를 만들기 위해 정의한 객체를 프로토타입 객체라함
  Person.prototype.walk = functioon(speed){
      console.log(speed + 'km 속도로 걸어갑니다.');
  }
 
  var person01 = new Person('Soso',20);
  var person02 = new Person('baba',29);
+
+ function Person2(name,age){
+     this.name = name;
+     this.age = age
+ }
