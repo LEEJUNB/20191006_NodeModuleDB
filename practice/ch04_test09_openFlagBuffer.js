@@ -3,7 +3,7 @@ var fs = require('fs');
 fs.open('./output.txt','r',function(err,fd) {
     if(err) throw err;
     // DeprecationWarning: Buffer() is deprecated due to security and usability issues. 
-    //lease use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+    // lease use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
     var buf = new Buffer.alloc(10); 
     console.log('buffer type : %s', Buffer.isBuffer(buf));
 
